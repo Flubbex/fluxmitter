@@ -1,0 +1,19 @@
+{
+  "name": "fluxmitter",
+  "version": "1.0.0",
+  "description": "Another emitter library for javascript",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "js",
+    "emitter",
+    "library"
+  ],
+  "author": "Flubbex",
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "^3.2.0"
+  }
+}
