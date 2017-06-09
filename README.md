@@ -27,7 +27,7 @@
     },
   });
   
-  parent = {
+  var parent = {
     lorem:"Lorem",
     ipsum:"Ipsum"
   };
