@@ -22,14 +22,30 @@ fluxmitter.emit = function() //event,data,args[0],...
 {
     var args        = [].slice.call(arguments);
     var event       = args.shift();
+    var events      = [];
 
-    if (!this.events[event])
-        if (fluxmitter.strict)
-            throw new Error("fluxmitter violation: No such event "+event);
-        else
-            return null
+    //extend with wildcard events
+    if (!this.events["*"])
+    {
+      if (event !== "*")
+      {
+        if (!this.events[event])
+            if (fluxmitter.strict)
+                throw new Error("fluxmitter violation"+
+                                "No such event "+event);
+              else
+                return null
 
-    var events = this.events[event];
+        events = this.events[event];
+      }
+      else
+        for (var eventname in this.events)
+          events = events.concat(this.events[eventname]);
+    }
+    else
+    {
+      events = events.concat(this.events["*"])
+    }
 
     return events.map(function(eventinfo)
     {
@@ -89,5 +105,7 @@ fluxmitter.off = function()
 //Throws during an emit if no callbacks are found.
 //if strict === false then stay quiet.
 fluxmitter.strict = false;
+
+var x = fluxmitter();
 
 module.exports = fluxmitter;
