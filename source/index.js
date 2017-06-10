@@ -108,6 +108,4 @@ fluxmitter.off = function()
 //if strict === false then stay quiet.
 fluxmitter.strict = false;
 
-var x = fluxmitter();
-
 module.exports = fluxmitter;
