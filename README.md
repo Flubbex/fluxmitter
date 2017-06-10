@@ -5,18 +5,23 @@
 #### fluxmitter(...)
   Returns a new fluxmitter based on the source object.
 
-#### fluxmitter.on(eventname,callback,parent)
+#### fluxmitter.on(eventname||"*",callback,parent)
   Runs the given callback when the specified *eventname* is emitted. Optional parent argument will be passed as *this*.
 
   Multiple callbacks can be assigned to a single event.
+  
+  A string wildcard will represent every event, even those added later.
 
   Optional parent argument will be used as the callback's *this* value.
 
 #### fluxmitter.off(eventname,callback)
   Stops the callback from happening when *eventname* is emitted.
 
-#### fluxmitter.emit(eventname,data)
+#### fluxmitter.emit(eventname||"*",data)
   Runs all callbacks associated with *eventname* passing *data* as argument.
+  
+  A string wildcard will represent every event, even those added later.
+  
 
 ### Usage
 ```
@@ -40,6 +45,22 @@
 
   //prints "Lorem" "Ipsum" true
 ```
+
+```
+var emitter = fluxmitter(events:{
+  name:"Something",
+  "*":function(data){
+    console.log(this.name,data);
+  }
+});
+
+emitter.emit("sweet") //outputs "something sweet"
+emitter.emit("sour") //outputs  "something sour"
+emitter.emit("salty") //outputs "something salty"
+
+
+```
+
 
 ### Installation
 #### curl
