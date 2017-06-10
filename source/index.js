@@ -46,12 +46,14 @@ fluxmitter.emit = function() //event,data,args[0],...
     {
       events = events.concat(this.events["*"])
     }
-
+    var self = this;
     return events.map(function(eventinfo)
     {
         var argsextended = eventinfo.args.concat(args);
         return {eventinfo:eventinfo,
-                result:eventinfo.callback.apply(eventinfo.parent,argsextended)
+                result:eventinfo.callback.apply(
+                  eventinfo.parent||self,
+                  argsextended)
             };
     });
 
