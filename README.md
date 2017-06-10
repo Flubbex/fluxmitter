@@ -2,10 +2,11 @@
 *Javascript emitter for web and Node.*
 
 ### Documentation
-#### fluxmitter(...)
+
+#### var emitter = fluxmitter({property:"value"})
   Returns a new fluxmitter based on the source object.
 
-#### fluxmitter.on(eventname||"*",callback,parent)
+#### emitter.on(eventname||"*",callback,parent)
   Runs the given callback when the specified *eventname* is emitted. Optional parent argument will be passed as *this*.
 
   Multiple callbacks can be assigned to a single event.
@@ -14,15 +15,19 @@
 
   Optional parent argument will be used as the callback's *this* value.
 
-#### fluxmitter.off(eventname,callback)
+#### emitter.off(eventname,callback)
   Stops the callback from happening when *eventname* is emitted.
 
-#### fluxmitter.emit(eventname||"*",data)
+#### emitter.emit(eventname||"*",data)
   Runs all callbacks associated with *eventname* passing *data* as argument.
   
-  A string wildcard will represent every event, even those added later.
-  
+  A string wildcard will represent every event, even those added later.  
 
+#### fluxmitter.strict = "true" (default: "false")
+  Throws an error if an event is emitted to without having any bound callbacks.
+  
+  Useful for debugging.
+  
 ### Usage
 ```
   var emitter = fluxmitter({
