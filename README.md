@@ -52,16 +52,15 @@
 ```
 
 ```
-var emitter = fluxmitter(events:{
-  name:"Something",
-  "*":function(data){
-    console.log(this.name,data);
-  }
-});
-
-emitter.emit("sweet") //outputs "something sweet"
-emitter.emit("sour") //outputs  "something sour"
-emitter.emit("salty") //outputs "something salty"
+var emitter = fluxmitter({name:"something"});
+ 
+ emitter.on("*",function(data){
+  console.log(data);
+ });
+ 
+emitter.emit("some event",      "sweet"); //outputs "sweet"
+emitter.emit("another event",   "sour");  //outputs  "sour"
+emitter.emit("even this one",  "salty");  //outputs "salty"
 
 
 ```
